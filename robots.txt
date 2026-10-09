@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://futbollibre.es/sitemap.xml
+Sitemap: https://futbollibrees.vercel.app/sitemap.xml
