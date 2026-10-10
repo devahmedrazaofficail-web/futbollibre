@@ -115,7 +115,7 @@ rings, skip link. Channel cards use **text badges, not trademarked logos**.
 
 ## 9. Outstanding / owner tasks
 
-- [ ] Replace placeholder domain `https://futbollibrees.vercel.app/` (canonicals, OG, sitemap,
+- [ ] Replace placeholder domain `https://futbollibrelivetv.com/` (canonicals, OG, sitemap,
       robots.txt, JSON-LD, README) with the real domain.
 - [ ] Contact form: add Formspree endpoint (`contacto.html` currently `f/TU_ID`).
 - [ ] Connect real Discord/Telegram links (homepage buttons currently `#`, flagged in UI title).

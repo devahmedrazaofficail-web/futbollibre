@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://futbollibrees.vercel.app/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/agenda</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/canales</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/ligas</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/guia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/nosotros</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/contacto</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/privacidad</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/terminos</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/dmca</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://futbollibrees.vercel.app/aviso-legal</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://futbollibrelivetv.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://futbollibrelivetv.com/agenda</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://futbollibrelivetv.com/canales</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://futbollibrelivetv.com/ligas</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://futbollibrelivetv.com/guia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://futbollibrelivetv.com/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://futbollibrelivetv.com/nosotros</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://futbollibrelivetv.com/contacto</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://futbollibrelivetv.com/privacidad</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://futbollibrelivetv.com/terminos</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://futbollibrelivetv.com/dmca</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://futbollibrelivetv.com/aviso-legal</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

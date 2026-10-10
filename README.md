@@ -43,7 +43,7 @@ Edita `assets/js/fixtures.js`: cada día tiene `date`, `label`, `longLabel` y un
 
 ## Tareas del propietario (pendientes)
 
-- [ ] **Dominio real**: sustituir el dominio provisional `https://futbollibrees.vercel.app/`
+- [ ] **Dominio real**: sustituir el dominio provisional `https://futbollibrelivetv.com/`
       en todos los `canonical`, `og:url`, `sitemap.xml`, `robots.txt` y JSON-LD.
 - [ ] **Formulario de contacto**: crear un formulario gratuito en formspree.io y
       sustituir `action="https://formspree.io/f/TU_ID"` en `contacto.html`.
