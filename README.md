@@ -19,20 +19,28 @@ sin base de datos.
 ├── privacidad.html / terminos.html / dmca.html / aviso-legal.html
 ├── 404.html
 ├── robots.txt / sitemap.xml / vercel.json
+├── api/fixtures.js     (endpoint privado para football-data.org)
 └── assets/
     ├── css/style.css
     ├── js/main.js        (navegación móvil, acordeón FAQ, año)
-    ├── js/agenda.js     (motor de la agenda: pestañas, buscador, filtros, modal)
-    └── js/fixtures.js   (DATOS: partidos 10–12 oct 2026 + canales)
+    └── js/agenda.js      (carga y renderiza los partidos)
 ```
 
-## Actualizar la agenda cada jornada
+## Agenda automática
 
-Edita `assets/js/fixtures.js`: cada día tiene `date`, `label`, `longLabel` y una lista
-`matches` con `time` (HH:MM, hora peninsular), `comp`, `home`, `away`, `flag` (emoji),
-`cat` (`futbol`, `baloncesto`, `hockey`, `motor`, `boxeo`, `tenis`, `otro`),
-`venue` (opcional), `tv` (nombres de `FUTBOL_LIBRE_CHANNELS`, opcional) y
-`approx: true` si el horario está por confirmar.
+La agenda solicita a football-data.org los partidos de hoy y de los dos días siguientes
+mediante `api/fixtures.js`. La API key se mantiene en el servidor y nunca se expone al
+navegador. La página actualiza los datos al cargar y cada 15 minutos. La cobertura es
+fútbol y depende de las competiciones disponibles en el plan de football-data.org; no
+incluye baloncesto, hockey, motor ni enlaces o reproductores de retransmisión.
+
+Para activar la API en Vercel:
+
+1. Crea una cuenta en [football-data.org](https://www.football-data.org/client/register)
+   y genera un token para el plan que cubra tus competiciones.
+2. En el proyecto de Vercel abre **Settings → Environment Variables**.
+3. Añade `FOOTBALL_DATA_API_TOKEN` con ese token para Production (y Preview si lo necesitas).
+4. Vuelve a desplegar el proyecto. Sin el token, la agenda muestra un aviso de configuración.
 
 ## Despliegue en Vercel
 

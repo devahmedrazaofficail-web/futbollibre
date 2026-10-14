@@ -58,9 +58,9 @@
       "mainEntity": [
         {"@type": "Question", "name": "¿Es gratis consultar la agenda de Fútbol Libre?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El acceso a la agenda de Fútbol Libre es totalmente gratuito y no requiere registro ni descargas."}},
         {"@type": "Question", "name": "¿En qué horario se muestran los partidos?", "acceptedAnswer": {"@type": "Answer", "text": "Todos los horarios se muestran en hora peninsular española (CEST en verano, CET en invierno)."}},
-        {"@type": "Question", "name": "¿Fútbol Libre emite los partidos en directo?", "acceptedAnswer": {"@type": "Answer", "text": "No. Fútbol Libre es una agenda informativa: no retransmite partidos ni publica reproductores. Cada ficha indica los canales oficiales que emiten el encuentro."}},
+        {"@type": "Question", "name": "¿Fútbol Libre emite los partidos en directo?", "acceptedAnswer": {"@type": "Answer", "text": "No. Fútbol Libre es una agenda informativa: no retransmite partidos ni publica reproductores. Consulta la programación oficial de cada competición u operador."}},
         {"@type": "Question", "name": "¿Necesito registrarme o instalar alguna aplicación?", "acceptedAnswer": {"@type": "Answer", "text": "No. La agenda es de acceso libre desde cualquier navegador, sin cuentas ni instalaciones."}},
-        {"@type": "Question", "name": "¿Qué ligas y torneos cubre la agenda?", "acceptedAnswer": {"@type": "Answer", "text": "LaLiga, Premier League, Serie A, Bundesliga, Ligue 1, competiciones UEFA, Liga MX, fútbol sudamericano y fechas de selecciones, además de baloncesto, NHL, motor y otros deportes."}}
+        {"@type": "Question", "name": "¿Qué ligas y torneos cubre la agenda?", "acceptedAnswer": {"@type": "Answer", "text": "La agenda automática muestra fútbol de las competiciones disponibles en el plan de football-data.org. La disponibilidad de cada liga depende de la cobertura de la API; otros deportes no se incluyen en la agenda automática."}}
       ]
     }
   ]
@@ -82,7 +82,7 @@
   <div class="wrap">
     <div class="hero">
       <h1>Fútbol Libre en Vivo</h1>
-      <p class="lede">Disfruta en <strong>Fútbol Libre</strong> de la mejor <a href="/agenda">agenda de partidos de fútbol</a> y la guía de <a href="/canales">canales deportivos</a>, con horarios en hora peninsular española y programación actualizada cada jornada. Sigue LaLiga, la Premier League, la Serie A, la Bundesliga, la Ligue 1, la Liga MX y el fútbol sudamericano.</p>
+      <p class="lede">Disfruta en <strong>Fútbol Libre</strong> de la <a href="/agenda">agenda de partidos de fútbol</a> y la guía de <a href="/canales">canales deportivos</a>, con horarios en hora peninsular española y programación actualizada automáticamente. Sigue los encuentros disponibles de las principales competiciones.</p>
     </div>
 
     <!-- ============ AGENDA ============ -->
@@ -95,6 +95,7 @@
             <option value="all">Todas las categorías</option>
           </select>
         </div>
+        <p class="agenda-status" role="status" aria-live="polite">Cargando partidos…</p>
         <div class="day-tabs" role="group" aria-label="Elegir día"></div>
         <ul class="match-list"></ul>
         <p class="agenda-empty" hidden>No hay partidos que coincidan con tu búsqueda. Prueba con otro equipo o cambia de día.</p>
@@ -152,11 +153,11 @@
     <div class="prose">
       <h2>¿Qué es Fútbol Libre?</h2>
       <p><strong>Fútbol Libre</strong> es un portal informativo en español que reúne en un solo lugar la <strong>agenda de partidos de fútbol en vivo</strong> y la guía de <strong>canales deportivos</strong>: horarios en hora peninsular española, competiciones, estadios y la información oficial sobre dónde se retransmite cada encuentro. Cubrimos desde <strong>LaLiga</strong> hasta la <strong>Premier League</strong>, la <strong>Serie A</strong>, la <strong>Bundesliga</strong> y la <strong>Ligue 1</strong>, además de la <strong>Liga MX</strong>, el fútbol sudamericano y las fechas de selecciones.</p>
-      <p>Nuestro objetivo es que no te pierdas ningún partido: una agenda clara, actualizada cada jornada, que se consulta en segundos desde el móvil, la tableta, el ordenador o la Smart TV, sin registros ni descargas. Cada ficha de partido indica el horario exacto, la competición y los canales oficiales que lo emiten.</p>
+      <p>Nuestro objetivo es que no te pierdas ningún partido: una agenda clara, actualizada automáticamente, que se consulta en segundos desde el móvil, la tableta, el ordenador o la Smart TV, sin registros ni descargas. Cada ficha indica el horario, la competición y el estadio cuando está disponible; para canales y emisiones, consulta siempre la programación oficial.</p>
 
       <h2>Ver fútbol en vivo por internet gratis</h2>
-      <p>Consultar la programación es muy sencillo: abre la <a href="/agenda">sección de agenda</a>, busca el partido de tu equipo o filtra por competición, y toca el encuentro para ver su ficha completa con horario, estadio y canales oficiales. Así sabrás de un vistazo qué hay hoy y dónde verlo de forma legal.</p>
-      <p>Además, la web está optimizada para todos los dispositivos: teléfonos Android e iOS, tabletas, ordenadores de escritorio, portátiles y navegadores de Smart TV. No necesitas instalar aplicaciones ni crear cuentas: la agenda es de acceso libre y se actualiza cada jornada con horarios verificados.</p>
+      <p>Consultar la programación es muy sencillo: abre la <a href="/agenda">sección de agenda</a>, busca el partido de tu equipo o competición y toca el encuentro para ver su ficha con horario y estadio cuando estén disponibles. Para saber dónde verlo, confirma la programación con la competición o el operador oficial.</p>
+      <p>Además, la web está optimizada para todos los dispositivos: teléfonos Android e iOS, tabletas, ordenadores de escritorio, portátiles y navegadores de Smart TV. No necesitas instalar aplicaciones ni crear cuentas: la agenda es de acceso libre y consulta automáticamente los próximos partidos disponibles en la fuente de datos.</p>
 
       <h2>Ligas y torneos que puedes ver en vivo</h2>
       <p>Aquí tienes acceso a una cobertura amplia del fútbol nacional e internacional:</p>
@@ -168,13 +169,13 @@
         <li><a href="/ligas">Competiciones UEFA</a>: Champions League, Europa League y Conference League.</li>
         <li><a href="/ligas">Selecciones</a>: Nations League, amistosos y torneos FIFA en fechas internacionales.</li>
       </ul>
-      <p>Visita la <a href="/agenda">agenda de partidos</a> todos los días para descubrir los horarios exactos en hora española y los canales oficiales de cada jornada.</p>
+      <p>Visita la <a href="/agenda">agenda de partidos</a> para consultar los próximos encuentros disponibles y confirma los canales en la programación oficial.</p>
 
       <h2>¿Cómo ver los partidos en vivo?</h2>
       <ol class="steps">
         <li><strong>Abre la Agenda de Partidos</strong> al inicio de esta página o desde el menú principal.</li>
-        <li><strong>Busca el partido de tu equipo</strong> o filtra por deporte y categoría.</li>
-        <li><strong>Toca el partido</strong> para ver su ficha: horario en hora peninsular, estadio y canales oficiales. Elige el operador y a disfrutar.</li>
+        <li><strong>Busca el partido de tu equipo</strong> o competición.</li>
+        <li><strong>Toca el partido</strong> para ver su ficha con horario en hora peninsular y estadio si está disponible; consulta la programación oficial para conocer los canales.</li>
       </ol>
       <p>Si un horario cambia a última hora, la agenda se actualiza cada jornada; ante cualquier duda, confirma la programación oficial. Tienes el paso a paso completo en nuestra <a href="/guia">guía para ver partidos</a>.</p>
 
@@ -208,16 +209,16 @@
         <div class="league-card"><strong>LigaPro Serie A</strong><span>🇪🇨 Ecuador</span></div>
         <div class="league-card"><strong>Primeira Liga</strong><span>🇵🇹 Portugal</span></div>
       </div>
-      <p>Toda la programación se publica en hora peninsular española y se actualiza cada jornada.</p>
+      <p>Los horarios se muestran en hora peninsular española. La agenda de partidos disponibles se consulta automáticamente y se actualiza periódicamente.</p>
 
       <h2>Preguntas frecuentes</h2>
       <div class="faq">
         <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Es gratis consultar la agenda de Fútbol Libre?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Sí. El acceso a la agenda es totalmente gratuito y no requiere registro, suscripciones ni descargas.</p></div></div></div>
         <div class="faq-item"><button class="faq-q" aria-expanded="false">¿En qué horario se muestran los partidos?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Todos los horarios se muestran en <strong>hora peninsular española</strong> (CEST en verano, CET en invierno). Desde Canarias, resta una hora.</p></div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Fútbol Libre emite los partidos en directo?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. Somos una agenda informativa: no retransmitimos partidos ni publicamos reproductores. Cada ficha indica los canales oficiales que emiten el encuentro para verlo de forma legal.</p></div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Fútbol Libre emite los partidos en directo?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. Somos una agenda informativa: no retransmitimos partidos ni publicamos reproductores. Consulta la programación oficial de cada competición u operador.</p></div></div></div>
         <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Necesito registrarme o instalar alguna aplicación?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>No. La agenda es de acceso libre desde cualquier navegador y funciona en móviles, tabletas, ordenadores y Smart TV sin instalar nada.</p></div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Qué ligas y torneos cubre la agenda?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p><a href="/ligas">Cubrimos las principales competiciones</a>: LaLiga, Premier League, Serie A, Bundesliga, Ligue 1, torneos UEFA, Liga MX, fútbol sudamericano y fechas de selecciones, además de baloncesto, NHL, motor y otros deportes.</p></div></div></div>
-        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Con cuánta antelación se publica la programación?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>La agenda se actualiza <strong>cada jornada</strong> con varios días de antelación. Como las competiciones pueden mover horarios, te recomendamos confirmar la programación oficial el día del partido.</p></div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Qué ligas y torneos cubre la agenda?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>La agenda automática muestra fútbol de las competiciones disponibles en el plan de football-data.org. La disponibilidad de cada liga depende de la cobertura de la API; otros deportes no se incluyen en la agenda automática. Consulta también nuestra <a href="/ligas">guía de ligas y torneos</a>.</p></div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Con cuánta antelación se publica la programación?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>La agenda muestra los partidos de hoy y de los dos días siguientes y actualiza los datos automáticamente. Como las competiciones pueden mover horarios, confirma la programación oficial el día del partido.</p></div></div></div>
         <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Cómo aviso de un horario incorrecto?<span class="icon" aria-hidden="true">+</span></button><div class="faq-a"><div class="faq-a-inner"><p>Desde la página de <a href="/contacto">contacto</a>, indicando el partido y la fecha. Revisamos los avisos en un plazo habitual de 48 horas laborables.</p></div></div></div>
       </div>
     </div>
@@ -234,7 +235,6 @@
     <div class="footer-bottom"><span>© <span data-year>2026</span> Fútbol Libre. Todos los derechos reservados.</span><span>Hecho con HTML, CSS y JavaScript vanilla.</span></div>
   </div>
 </footer>
-<script src="assets/js/fixtures.js"></script>
 <script src="assets/js/agenda.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

@@ -1,18 +1,17 @@
-/* Fútbol Libre — agenda.js: renders the match agenda.
-   Depends on window.FUTBOL_LIBRE_FIXTURES (assets/js/fixtures.js). */
+/* Fútbol Libre — agenda.js: fetches and renders the match agenda. */
 (function () {
   "use strict";
 
   var root = document.getElementById("agenda-app");
   if (!root) return;
-  var DATA = window.FUTBOL_LIBRE_FIXTURES || { days: [] };
-  var CHANNELS = window.FUTBOL_LIBRE_CHANNELS || [];
+  var DATA = { days: [] };
 
   var state = { day: 0, q: "", cat: "all" };
 
   var listEl = root.querySelector(".match-list");
   var emptyEl = root.querySelector(".agenda-empty");
   var tabsEl = root.querySelector(".day-tabs");
+  var statusEl = root.querySelector(".agenda-status");
   var searchEl = root.querySelector('[data-agenda="search"]');
   var catEl = root.querySelector('[data-agenda="category"]');
   var modal = document.getElementById("match-modal");
@@ -35,20 +34,30 @@
   }
 
   function isLive(m) {
-    // A match is "live" if today is its day and kickoff was < 115 min ago.
+    if (m.live === true) return true;
+    if (m.live === false) return false;
     try {
       var now = new Date();
       var day = DATA.days[state.day];
-      if (!day || day.date !== toISODate(now)) return false;
+      if (!day || day.date !== madridToday()) return false;
       var kickoff = new Date(day.date + "T" + m.time + ":00");
       var diffMin = (now - kickoff) / 60000;
       return diffMin >= 0 && diffMin < 115;
     } catch (e) { return false; }
   }
 
-  function toISODate(d) {
-    var p = function (n) { return (n < 10 ? "0" : "") + n; };
-    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  function madridToday() {
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Madrid",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+    var values = {};
+    parts.forEach(function (part) {
+      if (part.type !== "literal") values[part.type] = part.value;
+    });
+    return values.year + "-" + values.month + "-" + values.day;
   }
 
   function matches(m) {
@@ -77,26 +86,33 @@
     });
   }
 
+  function renderCategories() {
+    if (!catEl) return;
+    var selected = state.cat;
+    catEl.innerHTML = '<option value="all">Todas las categorías</option>';
+    var categories = {};
+    DATA.days.forEach(function (day) {
+      day.matches.forEach(function (match) { categories[match.cat] = true; });
+    });
+    Object.keys(categories).sort().forEach(function (category) {
+      var option = document.createElement("option");
+      option.value = category;
+      option.textContent = CATEGORY_LABELS[category] || category;
+      catEl.appendChild(option);
+    });
+    catEl.value = categories[selected] ? selected : "all";
+    state.cat = catEl.value;
+  }
+
   function renderList() {
     var day = DATA.days[state.day];
     listEl.innerHTML = "";
     var items = day ? day.matches.filter(matches) : [];
 
-    // Populate category select once (from all days)
-    if (catEl && catEl.options.length <= 1) {
-      var cats = {};
-      DATA.days.forEach(function (d) {
-        d.matches.forEach(function (m) { cats[m.cat] = true; });
-      });
-      Object.keys(cats).sort().forEach(function (c) {
-        var o = document.createElement("option");
-        o.value = c;
-        o.textContent = CATEGORY_LABELS[c] || c;
-        catEl.appendChild(o);
-      });
-    }
-
     if (!items.length) {
+      emptyEl.textContent = day && !day.matches.length && !state.q
+        ? "No hay partidos programados para este día."
+        : "No hay partidos que coincidan con tu búsqueda. Prueba con otro equipo o cambia de día.";
       emptyEl.hidden = false;
       return;
     }
@@ -123,26 +139,15 @@
     });
   }
 
-  function channelInfo(name) {
-    for (var i = 0; i < CHANNELS.length; i++) {
-      if (CHANNELS[i].name === name) return CHANNELS[i];
-    }
-    return null;
-  }
-
   function openModal(day, m) {
     if (!modal) return;
-    var official = (m.tv || []).map(function (t) {
-      var c = channelInfo(t);
-      return c ? c.name + " (" + c.how + ")" : t;
-    });
     modal.querySelector("[data-m='title']").textContent = m.home + " vs " + m.away;
     modal.querySelector("[data-m='comp']").textContent = m.comp;
     document.getElementById("modal-home").textContent = m.home;
     document.getElementById("modal-away").textContent = m.away;
     modal.querySelector("[data-m='datetime']").textContent = day.longLabel + " · " + (m.approx ? "≈" : "") + m.time + " (hora peninsular española)" + (m.approx ? " — horario por confirmar" : "");
     modal.querySelector("[data-m='venue']").textContent = m.venue || "Por confirmar";
-    modal.querySelector("[data-m='tv']").textContent = official.length ? official.join(" · ") : "Consulta la programación oficial de la competición";
+    modal.querySelector("[data-m='tv']").textContent = "Consulta la programación oficial de la competición";
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
     var closeBtn = modal.querySelector(".modal-close");
@@ -181,14 +186,56 @@
     });
   }
 
-  // Default to the tab matching the visitor's local date when available.
-  (function pickToday() {
-    var today = toISODate(new Date());
-    DATA.days.forEach(function (d, i) {
-      if (d.date === today) state.day = i;
-    });
-  })();
+  function showStatus(message, isError) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.toggle("is-error", Boolean(isError));
+  }
 
-  renderTabs();
-  renderList();
+  function renderData(data) {
+    if (!data || !Array.isArray(data.days)) {
+      throw new Error("La respuesta de la agenda no tiene el formato esperado.");
+    }
+    DATA = data;
+    state.day = 0;
+    DATA.days.forEach(function (day, index) {
+      if (day.date === madridToday()) state.day = index;
+    });
+    renderCategories();
+    renderTabs();
+    renderList();
+  }
+
+  var loading = false;
+  function loadFixtures() {
+    if (loading) return;
+    loading = true;
+    if (!DATA.days.length) showStatus("Cargando partidos…", false);
+
+    fetch("/api/fixtures", {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    })
+      .then(function (response) {
+        return response.json().then(function (payload) {
+          if (!response.ok) {
+            throw new Error(payload && payload.error ? payload.error : "No se pudo cargar la agenda.");
+          }
+          return payload;
+        });
+      })
+      .then(function (payload) {
+        renderData(payload);
+        showStatus("Agenda actualizada automáticamente · Datos de football-data.org.", false);
+      })
+      .catch(function (error) {
+        showStatus(error.message || "No se pudo cargar la agenda.", true);
+      })
+      .then(function () {
+        loading = false;
+      });
+  }
+
+  loadFixtures();
+  window.setInterval(loadFixtures, 15 * 60 * 1000);
 })();

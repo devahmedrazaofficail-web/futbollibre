@@ -46,7 +46,7 @@
 <main id="contenido">
   <div class="page-hero"><div class="wrap">
     <h1>Agenda de partidos en vivo</h1>
-    <p>Todos los partidos de hoy y de los próximos días, con horarios en hora peninsular española y canales oficiales. Toca cualquier encuentro para ver su ficha completa.</p>
+    <p>Partidos de fútbol de hoy y de los próximos días, con horarios en hora peninsular española. Toca cualquier encuentro para ver su ficha y consultar la programación oficial.</p>
   </div></div>
   <div class="wrap page-body">
     <nav class="breadcrumbs" aria-label="Migas de pan"><a href="/">Inicio</a> › Agenda</nav>
@@ -59,10 +59,11 @@
             <option value="all">Todas las categorías</option>
           </select>
         </div>
+        <p class="agenda-status" role="status" aria-live="polite">Cargando partidos…</p>
         <div class="day-tabs" role="group" aria-label="Elegir día"></div>
         <ul class="match-list"></ul>
         <p class="agenda-empty" hidden>No hay partidos que coincidan con tu búsqueda. Prueba con otro equipo o cambia de día.</p>
-        <p class="agenda-note">Horarios en hora peninsular española. Los marcados con ≈ están por confirmar. La agenda se actualiza cada jornada.</p>
+        <p class="agenda-note">Horarios en hora peninsular española. La agenda muestra hoy y los dos días siguientes y actualiza los datos automáticamente.</p>
       </div>
     </section>
     <div class="modal-backdrop" id="match-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -89,7 +90,7 @@
     </div>
     <div class="prose">
       <h2>Cómo usar la agenda</h2>
-      <p>La agenda de <strong>Fútbol Libre</strong> se abre en el día actual. Usa las pestañas superiores para moverte entre jornadas, el buscador para encontrar a tu equipo y el filtro por categoría para ver solo fútbol, baloncesto, hockey, motor u otros deportes. Al tocar un partido verás su ficha con el estadio y los canales oficiales que lo retransmiten.</p>
+      <p>La agenda de <strong>Fútbol Libre</strong> se abre en el día actual. Usa las pestañas superiores para moverte entre jornadas y el buscador para encontrar a tu equipo o competición. La agenda automática muestra fútbol de las competiciones disponibles en football-data.org; al tocar un partido verás su ficha y podrás consultar la programación oficial del torneo.</p>
       <p>¿Prefieres la guía paso a paso? La tienes en <a href="/guia">cómo ver los partidos en vivo</a>.</p>
     </div>
   </div>
@@ -105,7 +106,6 @@
     <div class="footer-bottom"><span>© <span data-year>2026</span> Fútbol Libre. Todos los derechos reservados.</span><span>Hecho con HTML, CSS y JavaScript vanilla.</span></div>
   </div>
 </footer>
-<script src="assets/js/fixtures.js"></script>
 <script src="assets/js/agenda.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

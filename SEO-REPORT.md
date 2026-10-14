@@ -119,5 +119,5 @@ rings, skip link. Channel cards use **text badges, not trademarked logos**.
       robots.txt, JSON-LD, README) with the real domain.
 - [ ] Contact form: add Formspree endpoint (`contacto.html` currently `f/TU_ID`).
 - [ ] Connect real Discord/Telegram links (homepage buttons currently `#`, flagged in UI title).
-- [ ] Refresh `fixtures.js` every matchday (format documented in README).
+- [ ] Configure `FOOTBALL_DATA_API_TOKEN` in Vercel to enable automatic fixtures.
 - [ ] Submit sitemap in Search Console after deploy.
